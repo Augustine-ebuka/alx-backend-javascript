@@ -1,86 +1,218 @@
-# ES6 Promises
+# ES6 Basics
 
-This project contains tasks for learning to use Promises in ECMAScript 2015 (ES6).
+This project contains tasks for learning the basics of ECMAScript 2015 (ES6).
 
 ## Tasks To Complete
 
-+ [x] 0. **Keep every promise you make and only make promises you can keep**<br/>[0-promise.js](0-promise.js) contains a script that exports a function with the prototype `function getResponseFromAPI()`, which returns a Promise.
-
-+ [x] 1. **Don't make a promise...if you know you can't keep it**<br/>[1-promise.js](1-promise.js) contains a script that exports a function with the prototype `getFullResponseFromAPI(success)`, which returns a Promise. The parameter (`success`) is a `boolean`.
-  + When the argument is:
-    + `true`
-      + Resolve the promise by passing an object with 2 attributes:
-        + `status`: `200`
-        + `body`: `'Success'`
-    + `false`
-      + Reject the promise with an error object with the message `The fake API is not working currently`.
-
-+ [x] 2. **Catch me if you can!**<br/>[2-then.js](2-then.js) contains a script that exports a function with the prototype `function handleResponseFromAPI(promise)`, which appends three handlers to the `promise` argument.
-  + When the Promise resolves, return an object with the following attributes:
-    + `status`: `200`,
-    + `body`: `'success'`
-  + When the Promise rejects, return an empty `Error` object.
-  + For every resolution, log `Got a response from the API` to the console.
-
-+ [x] 3. **Handle multiple successful promises**<br/>[3-all.js](3-all.js) contains a script that meets the following requirements.
-  + Import `uploadPhoto` and `createUser` from [utils.js](utils.js).
-  + Use the prototype below to collectively resolve all promises and log `body firstName lastName` to the console. The functions in [utils.js](utils.js) return Promises.
-    ```js
-    function handleProfileSignup()
-    ```
-  + In the event of an error, log `Signup system offline` to the console.
-
-+ [x] 4. **Simple promise**<br/>[4-user-promise.js](4-user-promise.js) contains a script that exports a function with the prototype `function signUpUser(firstName, lastName)`, which returns a resolved promise with the object shown below.
++ [x] 0. **Const or let?**<br/>[0-constants.js](0-constants.js) contains a script that meets the following requirements.
+  + For the code below, make the following modifications:
+    + function `taskFirst` to instantiate variables using `const`.
+    + function `taskNext` to instantiate variables using `let`.
   ```js
-  {
-    firstName: value,
-    lastName: value,
+  export function taskFirst() {
+    var task = 'I prefer const when I can.';
+    return task;
+  }
+
+  export function getLast() {
+    return ' is okay';
+  }
+
+  export function taskNext() {
+    var combination = 'But sometimes let';
+    combination += getLast();
+
+    return combination;
   }
   ```
 
-+ [x] 5. **Reject the promises**<br/>[5-photo-reject.js](5-photo-reject.js) contains a script that exports a function with the prototype `function uploadPhoto(filename)`, which returns a Promise rejecting with an Error and the string `$fileName cannot be processed`, where `fileName` is a string.
++ [x] 1. **Block Scope**<br/>[1-block-scoped.js](1-block-scoped.js) contains a script that meets the following requirements.
+  + For the code below, modify the variables inside the function `taskBlock` so that the variables aren't overwritten inside the conditional block.
+  ```js
+  export default function taskBlock(trueOrFalse) {
+    var task = false;
+    var task2 = true;
 
-+ [x] 6. **Handle multiple promises**<br/>[6-final-user.js](6-final-user.js) contains a script that meets the following requirements.
-  + Import `signUpUser` from [4-user-promise.js](4-user-promise.js) and `uploadPhoto` from [5-photo-reject.js](5-photo-reject.js).
-  + Export a function named `handleProfileSignup` that accepts three arguments `firstName` (string), `lastName` (string), and `fileName` (string) and calls the two other functions (`signUpUser` and `uploadPhoto`).
-  + When the promises are all settled it should return an array with the following structure:
-    ```js
-    [
-      {
-        status: status_of_the_promise,
-        value: value || reason // value or error returned by the Promise
+    if (trueOrFalse) {
+      var task = true;
+      var task2 = false;
+    }
+
+    return [task, task2];
+  }
+  ```
+
++ [x] 2. **Arrow functions**<br/>[2-arrow.js](2-arrow.js) contains a script that meets the following requirements.
+  + For the code below, rewrite the following standard function to use ES6's arrow syntax of the function `add`.
+  ```js
+  export default function getNeighborhoodsList() {
+    this.sanFranciscoNeighborhoods = ['SOMA', 'Union Square'];
+
+    const self = this;
+    this.addNeighborhood = function add(newNeighborhood) {
+      self.sanFranciscoNeighborhoods.push(newNeighborhood);
+      return self.sanFranciscoNeighborhoods;
+    };
+  }
+  ```
+
++ [x] 3. **Parameter defaults**<br/>[3-default-parameter.js](3-default-parameter.js) contains a script that meets the following requirements.
+  + For the code below, condense the internals of the following function to 1 line - without changing the name of each function/variable.
+  ```js
+  export default function getSumOfHoods(initialNumber, expansion1989, expansion2019) {
+    if (expansion1989 === undefined) {
+      expansion1989 = 89;
+    }
+
+    if (expansion2019 === undefined) {
+      expansion2019 = 19;
+    }
+    return initialNumber + expansion1989 + expansion2019;
+  }
+  ```
+
++ [x] 4. **Rest parameter syntax for functions**<br/>[4-rest-parameter.js](4-rest-parameter.js) contains a script that meets the following requirements.
+  + For the code below, modify the following function to return the number of arguments passed to it using the rest parameter syntax.
+  ```js
+  export default function returnHowManyArguments() {
+
+  }
+  ```
+
++ [x] 5. **The wonders of spread syntax**<br/>[5-spread-operator.js](5-spread-operator.js) contains a script that meets the following requirements.
+  + For the code below, using spread syntax, concatenate 2 arrays and each character of a string by modifying the function below. The function body should be one line long.
+  ```js
+  export default function concatArrays(array1, array2, string) {
+  }
+  ```
+
++ [x] 6. **Take advantage of template literals**<br/>[6-string-interpolation.js](6-string-interpolation.js) contains a script that meets the following requirements.
+  + For the code below, rewrite the return statement to use a template literal so you can the substitute the variables you’ve defined.
+  ```js
+  export default function getSanFranciscoDescription() {
+    const year = 2017;
+    const budget = {
+      income: '$119,868',
+      gdp: '$154.2 billion',
+      capita: '$178,479',
+    };
+
+    return 'As of ' + year + ', it was the seventh-highest income county in the United States' \
+          ', with a per capita personal income of ' + budget.income + '. As of 2015, San Francisco' \
+          ' proper had a GDP of ' + budget.gdp + ', and a GDP per capita of ' + budget.capita + '.';
+  }
+  ```
+
++ [x] 7. **Object property value shorthand syntax**<br/>[7-getBudgetObject.js](7-getBudgetObject.js) contains a script that meets the following requirements.
+  + For the code below, modify the following function’s `budget` object to simply use the keyname instead.
+  ```js
+  export default function getBudgetObject(income, gdp, capita) {
+    const budget = {
+      income: income,
+      gdp: gdp,
+      capita: capita,
+    };
+
+    return budget;
+  }
+  ```
+
++ [x] 8. **No need to create empty objects before adding in properties**<br/>[8-getBudgetCurrentYear.js](8-getBudgetCurrentYear.js) contains a script that meets the following requirements.
+  + For the code below, rewrite the `getBudgetForCurrentYear` function to use ES6 computed property names on the `budget` object.
+  ```js
+  function getCurrentYear() {
+    const date = new Date();
+    return date.getFullYear();
+  }
+
+  export default function getBudgetForCurrentYear(income, gdp, capita) {
+    const budget = {};
+
+    budget[`income-${getCurrentYear()}`] = income;
+    budget[`gdp-${getCurrentYear()}`] = gdp;
+    budget[`capita-${getCurrentYear()}`] = capita;
+
+    return budget;
+  }
+  ```
+
++ [x] 9. **ES6 method properties**<br/>[9-getFullBudget.js](9-getFullBudget.js) contains a script that meets the following requirements.
+  + For the code below, rewrite `getFullBudgetObject` to use ES6 method properties in the `fullBudget` object.
+  ```js
+  import getBudgetObject from './7-getBudgetObject.js';
+
+  export default function getFullBudgetObject(income, gdp, capita) {
+    const budget = getBudgetObject(income, gdp, capita);
+    const fullBudget = {
+      ...budget,
+      getIncomeInDollars: function (income) {
+        return `$${income}`;
       },
-      ...
-    ]
-    ```
+      getIncomeInEuros: function (income) {
+        return `${income} euros`;
+      },
+    };
 
-+ [x] 7. **Load balancer**<br/>[7-load_balancer.js](7-load_balancer.js) contains a script that exports a function with the prototype `function loadBalancer(chinaDownload, USDownload)`, which returns the value returned by the promise that resolved the first, where `chinaDownload` and `USDownload` are Promises.
+    return fullBudget;
+  }
+  ```
 
-+ [x] 8. **Throw error / try catch**<br/>[8-try.js](8-try.js) contains a script that meets the following requirements.
-  + Exports a function with the prototype `function divideFunction(numerator, denominator)`, where `numerator` and `denominator` are numbers.
-  + When the `denominator` argument is equal to 0, the function should throw a new error with the message `cannot divide by 0`.
-  + Otherwise it should return the `numerator` divided by the `denominator`.
++ [x] 10. **For...of Loops**<br/>[10-loops.js](10-loops.js) contains a script that meets the following requirements.
+  + For the code below, rewrite the function `appendToEachArrayValue` to use ES6’s `for...of` operator. And don’t forget that `var` is not ES6-friendly.
+  ```js
+  export default function appendToEachArrayValue(array, appendString) {
+    for (var idx in array) {
+      var value = array[idx];
+      array[idx] = appendString + value;
+    }
 
-+ [x] 9. **Throw an error**<br/>[9-try.js](9-try.js) contains a script that meets the following requirements.
-  + Export a function named `guardrail` that accepts a function argument called `mathFunction`.
-  + The `guardrail` function should create and return an array named `queue`.
-  + When the `mathFunction` function is executed, the value returned by the function should be appended to the `queue`. If this function throws an error, the error message should be appended to the `queue`.
-  + In every case, the message `Guardrail was processed` should be added to the queue.
+    return array;
+  }
+  ```
 
-+ [x] 10. **Await / Async**<br/>[100-await.js](100-await.js) contains a script that meets the following requirements.
-  + Import `uploadPhoto` and `createUser` from [utils.js](utils.js).
-  + Export an async function named `asyncUploadUser` that will call the two functions imported above and return an object with the following format:
++ [x] 11. **Iterator**<br/>[11-createEmployeesObject.js](11-createEmployeesObject.js) contains a script that meets the following requirements.
+  + Write a function named `createEmployeesObject` that will receive two arguments:
+    + `departmentName` (String).
+    + `employees` (Array of Strings).
     ```js
-    {
-      photo: response_from_uploadPhoto_function,
-      user: response_from_createUser_function,
+    export default function createEmployeesObject(departmentName, employees) {
+
     }
     ```
-  + Import `uploadPhoto` and `createUser` from [utils.js](utils.js).
-  + If one of the async function fails, return an empty object as shown below:
-    ```js
+    The function should return an object with the following format:
+    ```php
     {
-      photo: null,
-      user: null,
+      $departmentName: [
+        $employees,
+      ],
     }
     ```
+
++ [x] 12. **Let's create a report object**<br/>[12-createReportObject.js](12-createReportObject.js) contains a script that meets the following requirements.
+  + Write a function named `createReportObject` whose parameter, `employeesList`, is the return value of the previous function `createEmployeesObject`.
+    ```js
+    export default function createReportObject(employeesList) {
+
+    }
+    ```
+  + `createReportObject` should return an object containing the key `allEmployees` and a method property called `getNumberOfDepartments`.
+  + `allEmployees` is a key that maps to an object containing the department name and a list of all the employees in that department. If you’re having trouble, use the spread syntax.
+  + The method property receives employeesList and returns the number of departments.
+
++ [x] 13. **Iterating through report objects**<br/>[100-createIteratorObject.js](100-createIteratorObject.js) contains a script that meets the following requirements.
+  + Write a function named `createIteratorObject`, that will take into argument a report Object created with the previous function `createReportObject`.
+    ```js
+    export default function createIteratorObject(report) {
+
+    }
+    ```
+  + This function will return an iterator to go through every employee in every department.
+
++ [x] 14. **Iterate through object**<br/>[101-iterateThroughObject.js](101-iterateThroughObject.js) contains a script that meets the following requirements.
+  + Write a function named `iterateThroughObject`. The function’s parameter `reportWithIterator` is the return value from `createIteratorObject`.
+    ```js
+    export default function iterateThroughObject(reportWithIterator) {
+
+    }
+    ```
+  + It should return every employee name in a string, separated by ` | `.
